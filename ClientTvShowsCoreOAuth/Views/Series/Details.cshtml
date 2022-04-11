@@ -1,0 +1,71 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model Serie
+@{
+    ViewData["Title"] = "Detalles Serie";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Series" asp-action="Index">Series</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+  </ol>
+</nav>
+
+<h2>Detalles</h2>
+
+<div class="container">
+    <div class="text-center">
+        <img src="@Model.Imagen" alt="Foto de @Model.Titulo"
+            style="max-height:400px;height:100%;" class="img-thumbnail img-fluid">
+    </div>
+</div>
+<div class="container mt-2" style="max-width:390px;">
+    <table class="table table-borderless">
+        <thead>
+            <tr class="text-center">
+                <th scope="col" colspan="2"><h4>@Model.Titulo</h4></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <tr class="fs-6">
+                    <th scope="row" class="col-sm-6 text-center">ID</th>
+                    <td class="col-sm-6 text-center">@Model.IdSerie</td>
+                </tr>
+            }
+            <tr>
+                <th scope="row" class="col-sm-6 text-center">
+                    <label for="input-stars" class="control-label">Puntuación</label>
+                </th>
+                <td class="col-sm-6 text-center">
+                    <input id="input-stars" name="input-stars" value="@(Model.Puntuacion/2)" class="rating-loading">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="col-sm-6 text-center">Año estreno</th>
+                <td class="col-sm-6 text-center">@Model.Year</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container text-center mt-4" style="max-width:480px;">
+    <a asp-controller="Personajes" asp-action="BySerie"
+        asp-route-idserie="@Model.IdSerie" class="btn btn-primary rounded-pill w-100 mb-1">
+        Ver personajes
+    </a>
+    <a asp-controller="Series" asp-action="Index"
+        class="btn btn-secondary rounded-pill w-100">
+        Listado de series
+    </a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $('#input-stars').rating({ displayOnly: true, step: 0.01, size: 'xs', language: 'es' });
+        });
+    </script>
+}

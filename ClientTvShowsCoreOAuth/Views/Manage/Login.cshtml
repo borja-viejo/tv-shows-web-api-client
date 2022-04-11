@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="card" style="max-width: 460px;margin: auto;">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs" id="login-header" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login"
+          role="tab" aria-controls="login" aria-selected="true">
+          Log In
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="tab-content" id="login-content">
+      <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+        <h2 class="mb-4">Iniciar sesión</h2>
+        <form asp-controller="Manage" asp-action="Login" method="post">
+          <strong><label>Dirección de E-mail</label></strong>
+          <input type="text" name="username" class="form-control" />
+          <br />
+          <strong><label>Contraseña</label></strong>
+          <input type="password" name="password" class="form-control" />
+          <br />
+          <button type="submit" class="btn btn-primary rounded-pill w-100 mt-2">
+            Entrar
+          </button>
+          <h4 style="color: red" class="text-center mt-3">@ViewData["MENSAJE"]</h4>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

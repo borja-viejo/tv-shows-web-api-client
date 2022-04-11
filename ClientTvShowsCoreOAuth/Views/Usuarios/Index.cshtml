@@ -1,0 +1,14 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model Usuario
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<h2>Perfil de <span style="color:blue;">@Model.Email</span></h2>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2 mb-3">Nombre:</dt>
+    <dt class="col-sm-10 mb-3">@Model.Nombre</dt>
+    <dt class="col-sm-2 mb-3">Apellidos:</dt>
+    <dt class="col-sm-10 mb-3">@Model.Apellidos</dt>
+</dl>

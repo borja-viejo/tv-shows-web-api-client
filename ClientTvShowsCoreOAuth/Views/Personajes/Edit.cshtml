@@ -1,0 +1,72 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model Personaje
+@{
+    ViewData["Title"] = "Editar Personaje";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Personajes" asp-action="Index">Personajes</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Personajes" asp-action="Details"
+        asp-route-idpersonaje="@Model.IdPersonaje">Detalles</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Asignar serie</li>
+  </ol>
+</nav>
+
+<h2>Asignar serie a <span style="color:blue;">@Model.Nombre</span></h2>
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <strong><label class="col-form-label">Nombre</label></strong>
+                <input type="text" class="form-control" value="@Model.Nombre" readonly />
+            </div>
+            <div class="form-group mt-1">
+                <strong><label class="col-form-label">Serie actual</label></strong>
+                <input type="text" class="form-control" value="@ViewData["Serie"]" readonly />
+            </div>
+
+            <div class="mt-4">
+                <form asp-controller="Personajes" asp-action="Edit"
+                    asp-route-idpersonaje="@Model.IdPersonaje" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="IdPersonaje" />
+                    <input type="hidden" asp-for="Nombre" />
+                    <input type="hidden" asp-for="Imagen" />
+
+                    <strong><label asp-for="IdSerie" class="col-form-label">Nueva serie</label></strong>
+                    <select asp-for="IdSerie" asp-items="@ViewBag.Series" class="form-select"></select>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success rounded-pill w-100 mt-4">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="text-center mt-3">
+                <img src="@Model.Imagen" alt="Foto de @Model.Nombre"
+                    style="max-width:360px;width:100%;" class="img-thumbnail img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-1">
+        <div class="col-sm-4">
+            <a asp-controller="Personajes" asp-action="BySerie" asp-route-idserie="@Model.IdSerie"
+                class="btn btn-secondary rounded-pill w-100 mt-1">
+                Cancelar
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

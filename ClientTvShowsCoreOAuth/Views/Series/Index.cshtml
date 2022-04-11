@@ -1,0 +1,65 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model List<Serie>
+@{
+    ViewData["Title"] = "Series";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Series</li>
+  </ol>
+</nav>
+
+<h2 class="mb-4">Series</h2>
+
+<table class="table table-responsive-sm align-middle">
+    <thead>
+        <tr class="table-dark text-center">
+            <th scope="col"></th>
+            <th scope="col">Imagen</th>
+            <th scope="col" colspan="2">Información</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{ var counter = 0; }
+    @foreach (Serie serie in Model) {
+            <tr class="text-center">
+            <th scope="row" class="col-sm-1" rowspan="3">@(++counter)</th>
+            <td class="col-sm-5 px-0 align-middle" rowspan="3">
+                <img src="@serie.Imagen" alt="Foto de @serie.Titulo"
+                    style="max-width:280px;width:100%;" class="img-thumbnail img-fluid">
+            </td>
+            <td class="col-sm-6 table-secondary border-bottom-0" colspan="2">
+                <a asp-controller="Series" asp-action="Details"
+                    asp-route-idserie="@serie.IdSerie">
+                    @serie.Titulo
+                </a>
+            </td>
+        </tr>
+        <tr class="text-center table-secondary">
+            <td class="col-sm-3">
+                <input id="input-stars-@serie.IdSerie" name="input-stars-@serie.IdSerie"
+                    value="@(serie.Puntuacion/2)" class="rating-loading">
+            </td>
+            <td class="col-sm-3"><strong>Año estreno:</strong> @serie.Year</td>
+        </tr>
+        <tr class="text-center">
+            <td class="col-sm-6" colspan="2">
+                <a asp-controller="Personajes" asp-action="BySerie"
+                    asp-route-idserie="@serie.IdSerie" class="btn btn-info rounded-pill">
+                    Ver personajes
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $('.rating-loading').rating({ displayOnly: true, step: 0.01, size: 'sm', language: 'es' });
+        });
+    </script>
+}

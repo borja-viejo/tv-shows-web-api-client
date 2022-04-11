@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h2 class="mb-4">Bienvenido al Videoclub de los 80™</h2>
+    <img src="~/img/videoclub-80-logo.jpg" alt="Logo Videoclub de los 80"
+        style="max-height:580px;height:100%;" class="img-thumbnail img-fluid rounded-circle" />
+
+    <div class="container text-center mt-5" style="max-width:520px;">
+        <a asp-controller="Series" asp-action="Index"
+            class="btn btn-success btn-lg rounded-pill">
+            Listado de series
+        </a>
+        <a asp-controller="Personajes" asp-action="Index"
+            class="btn btn-success btn-lg rounded-pill">
+            Listado de personajes
+        </a>
+    </div>
+</div>

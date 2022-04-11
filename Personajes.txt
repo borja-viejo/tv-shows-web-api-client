@@ -1,0 +1,12 @@
+## Nuevo Personaje
+Id			34
+Nombre		Khal Drogo
+Imagen		https://cinematicos.net/wp-content/uploads/l-intro-1626367763.jpg
+IdSerie		1
+--------------------
+## Nuevo Personaje
+Id			35
+Nombre		Marshall Eriksen
+Imagen		https://applauss.com/wp-content/uploads/2017/01/How-I-Met-Your-Mother-Marshall.jpg
+IdSerie		8
+--------------------

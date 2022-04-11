@@ -1,0 +1,58 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model Personaje
+@{
+    ViewData["Title"] = "Crear Personaje";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Personajes" asp-action="Index">Personajes</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Añadir</li>
+  </ol>
+</nav>
+
+<h2>Añadir personaje</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form asp-controller="Personajes" asp-action="Create" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <strong><label asp-for="Nombre" class="col-form-label"></label></strong>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <strong><label asp-for="Imagen" class="col-form-label">Imagen URL</label></strong>
+                    <textarea asp-for="Imagen" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Imagen" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <strong><label asp-for="IdSerie" class="col-form-label">Serie</label></strong>
+                    <select asp-for="IdSerie" asp-items="@ViewBag.Series" class="form-select"></select>
+                    <span asp-validation-for="IdSerie" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success rounded-pill w-100 mt-4">
+                        Aceptar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-1">
+        <div class="col-sm-4">
+            <a asp-controller="Personajes" asp-action="Index"
+                class="btn btn-secondary rounded-pill w-100 mt-1">
+                Cancelar
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

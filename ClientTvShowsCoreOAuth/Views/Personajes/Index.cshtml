@@ -1,0 +1,60 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model List<Personaje>
+@{
+    ViewData["Title"] = "Personajes";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Personajes</li>
+  </ol>
+</nav>
+
+<h2 class="mb-4">Personajes</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p class="text-center">
+        <a asp-controller="Personajes" asp-action="Create" class="btn btn-outline-success rounded-pill w-100">Añadir personaje</a>
+    </p>
+}
+<table class="table table-responsive-sm align-middle">
+    <thead>
+        <tr class="table-dark text-center">
+            <th scope="col"></th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Información</th>
+        </tr>
+    </thead>
+    <tbody>
+    @{ var counter = 0; }
+    @foreach (Personaje personaje in Model) {
+        <tr class="text-center">
+            <th scope="row" class="col-sm-1" rowspan="2">@(++counter)</th>
+            <td class="col-sm-5 px-0 align-middle" rowspan="2">
+                <img src="@personaje.Imagen" alt="Foto de @personaje.Nombre"
+                    style="max-width:280px;width:100%;" class="img-thumbnail img-fluid">
+            </td>
+            <td class="col-sm-6 table-secondary border-bottom-0">
+                <a asp-controller="Personajes" asp-action="Details"
+                    asp-route-idpersonaje="@personaje.IdPersonaje">
+                    @personaje.Nombre
+                </a>
+            </td>
+        </tr>
+        <tr class="text-center table-secondary">
+            <td class="col-sm-6">
+                @foreach(Serie serie in (List<Serie>)ViewData["Series"])
+                {
+                    if (serie.IdSerie == personaje.IdSerie) { <strong>@serie.Titulo</strong> }
+                }
+                <a asp-controller="Series" asp-action="Details"
+                    asp-route-idserie="@personaje.IdSerie">
+                    <img src="~/img/link-dark.png" alt="Link icon" style="width:20px;height:20px;" />
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

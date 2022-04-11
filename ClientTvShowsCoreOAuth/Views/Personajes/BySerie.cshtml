@@ -1,0 +1,59 @@
+﻿@using ClientTvShowsCoreOAuth.Models
+@model List<Personaje>
+@{
+    ViewData["Title"] = "Personajes Serie";
+}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Personajes" asp-action="Index">Personajes</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Serie</li>
+  </ol>
+</nav>
+
+<h1 class="mb-4">Personajes de <span class="text-primary">@ViewData["Titulo"]</span></h1>
+
+<p class="text-center">
+    <a asp-controller="Series" asp-action="Details" asp-route-idserie="@ViewData["IdSerie"]"
+        class="btn btn-secondary rounded-pill w-100">
+        Volver a Detalles
+    </a>
+</p>
+<table class="table table-striped table-hover table-responsive-sm align-middle">
+    <thead>
+        <tr class="table-dark text-center">
+            <th scope="col"></th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Nombre</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @{ var counter = 0; }
+    @foreach (Personaje personaje in Model) {
+        <tr class="text-center">
+            <th scope="row" class="col-sm-1">@(++counter)</th>
+            <td class="col-sm-5 px-0 align-middle">
+                <img src="@personaje.Imagen" alt="Foto de @personaje.Nombre"
+                    style="max-width:280px;width:100%;" class="img-thumbnail img-fluid">
+            </td>
+            <td class="col-sm-4">
+                <a asp-controller="Personajes" asp-action="Details"
+                    asp-route-idpersonaje="@personaje.IdPersonaje">
+                    @personaje.Nombre
+                </a>
+            </td>
+            <td class="col-sm-2">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Personajes" asp-action="Edit"
+                    asp-route-idpersonaje="@personaje.IdPersonaje" class="btn btn-warning rounded-pill">
+                    Editar
+                </a>
+            }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
